@@ -49,3 +49,56 @@ CREATE TABLE orderitems (
     FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
     FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Table brands {
+   id int [pk]
+   name varchar
+   created_at timestamp
+}
+
+Table categories {
+   id int [pk]
+   name varchar
+   parent_id int [ref: > categories.id]
+   created_at timestamp
+}
+
+Table products {
+   id int [pk]
+   name varchar
+   description text
+   price decimal
+   stock int
+   brand_id int [ref: > brands.id]
+   category_id int [ref: > categories.id]
+   created_at timestamp
+}
+
+Table orders {
+   id int [pk]
+   user_id int
+   total_amount decimal
+   status enum
+   created_at timestamp
+}
+
+Table orderitems {
+   id int [pk]
+   order_id int [ref: > orders.id]
+   product_id int [ref: > products.id]
+   quantity int
+   price decimal
+}
